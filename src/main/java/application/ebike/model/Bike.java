@@ -1,58 +1,59 @@
 package application.ebike.model;
 
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "bike")
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Bike {
+
     @Id
     @Column(name = "bike_id")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-    private Integer bikeId;
+    private Integer id;
 
-    @OneToMany(mappedBy = "bike", cascade = { CascadeType.PERSIST })
-    private Collection<Item> bikes;
-
-    @Column(name = "name", length = 100)
+    @Column(name = "title", length = 15)
+    private String title;
+    @Column(name = "quote")
+    private String quote;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "price")
+    private Double price;
+    @Column(name = "name", length = 30)
     private String name;
-    @Column(name = "image_link", length = 100)
-    private String imageLink;
-    @Column(name = "producer", length = 50)
-    private String producer;
-    @Column(name = "original", length = 50)
-    private String original;
-    @Column(name = "width")
-    private Integer width;
-    @Column(name = "height")
-    private Integer height;
-    @Column(name = "length")
-    private Integer length;
-    @Column(name = "distance")
-    private Integer distance;
-    @Column(name = "velocity")
-    private Double velocity;
-    @Column(name = "weight")
-    private Double weight;
-    @Column(name = "tonnage")
-    private Double tonnage;
-    @Column(name = "charger")
-    private Double charger;
+    @Column(name = "quantity", length = 3)
+    private Integer quantity;
+    @Column(name = "imageUrl", length = 100)
+    private String imageUrl;
+    @Column(name = "distance", length = 20)
+    private String range;
+    @Column(name = "motor", length = 20)
+    private String motor;
+    @Column(name = "speed", length = 20)
+    private String speed;
+    @Column(name = "specifications", columnDefinition = "JSON")
+    private String specifications;
+
+    @PrePersist
+    private void initSpecifications() {
+        try {
+            specifications = new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
 }

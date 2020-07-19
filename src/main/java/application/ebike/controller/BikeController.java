@@ -2,22 +2,29 @@ package application.ebike.controller;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import application.ebike.model.Bike;
+import application.ebike.service.BikeService;
 
 @RestController
-@RequestMapping(value = "api/v1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/v1.0/bikes")
 public class BikeController {
-    
-    @GetMapping
-    public Collection<Bike> getBikeWithPagination(@PathVariable(name = "page") int page) {
-        
-        return null;
+
+    private BikeService bikeService;
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<Bike> getBikeWithPagination() {
+
+        return bikeService.getBikes();
     }
-    
+
+    @Autowired
+    public void setBikeService(BikeService bikeService) {
+        this.bikeService = bikeService;
+    }
 }
