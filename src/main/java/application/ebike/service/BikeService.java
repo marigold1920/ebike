@@ -1,5 +1,6 @@
 package application.ebike.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,18 @@ public class BikeService {
 
     private BikeRepository bikeRepository;
 
+    @Autowired
+    public void setBikeRepository(BikeRepository bikeRepository) {
+        this.bikeRepository = bikeRepository;
+    }
+
     public List<Bike> getBikes() {
 
         return bikeRepository.findAll();
     }
 
-    @Autowired
-    public void setBikeRepository(BikeRepository bikeRepository) {
-        this.bikeRepository = bikeRepository;
+    public Collection<Bike> saveBikes(Collection<Bike> bikes) {
+
+        return bikeRepository.saveAll(bikes);
     }
 }

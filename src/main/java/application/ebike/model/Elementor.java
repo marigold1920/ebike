@@ -23,7 +23,7 @@ public class Elementor {
 
     @Column(name = "title", length = 50)
     private String title;
-    @Column(name = "content")
+    @Column(name = "content", length = 1000)
     private String content;
     @Column(name = "action")
     private String action;

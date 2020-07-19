@@ -1,13 +1,19 @@
 package application.ebike.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -29,7 +35,7 @@ public class Bike {
     private String title;
     @Column(name = "quote")
     private String quote;
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
     @Column(name = "price")
     private Double price;
@@ -45,15 +51,10 @@ public class Bike {
     private String motor;
     @Column(name = "speed", length = 20)
     private String speed;
+    @Column(name = "color", length = 50)
+    private String color;
+    @Column(name = "characteristic", length = 100)
+    private String characteristic;
     @Column(name = "specifications", columnDefinition = "JSON")
     private String specifications;
-
-    @PrePersist
-    private void initSpecifications() {
-        try {
-            specifications = new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
 }
