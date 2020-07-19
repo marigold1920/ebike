@@ -22,4 +22,9 @@ public class ElementorService {
 
         return elementorRepository.saveAll(elementors);
     }
+
+    public Collection<Elementor> getElementors() {
+
+        return elementorRepository.findAll();
+    }
 }

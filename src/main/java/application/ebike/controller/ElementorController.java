@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,13 @@ import application.ebike.service.ElementorService;
 @RequestMapping(value = "api/v1.0/elementors")
 public class ElementorController {
 
+    @Autowired
     private ElementorService elementorService;
 
-    @Autowired
-    public void setElementorService(ElementorService elementorService) {
-        this.elementorService = elementorService;
+    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+    public Collection<Elementor> getElementors() {
+
+        return elementorService.getElementors();
     }
 
     @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
