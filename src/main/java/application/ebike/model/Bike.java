@@ -1,20 +1,10 @@
 package application.ebike.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -57,4 +47,9 @@ public class Bike {
     private String characteristic;
     @Column(name = "specifications", columnDefinition = "JSON")
     private String specifications;
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
