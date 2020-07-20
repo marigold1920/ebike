@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,8 +26,10 @@ public class BikeController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<BikeDTO> getBikeWithPagination() {
+        System.out.println("Ping");
 
         return bikeService.getBikes().stream().map(this::convertModelToDTO).collect(Collectors.toList());
     }
