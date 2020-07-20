@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+    install:
+        runtime-versions:
+            java: openjdk11
+    build:
+        commands:
+            - mvn clean install spring-boot:repackage
+artifacts:
+    files:
+        - target/ebike-0.0.1-SNAPSHOT.jar
