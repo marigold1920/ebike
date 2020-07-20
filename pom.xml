@@ -13,7 +13,7 @@
 	<artifactId>ebike</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>eletric_bikes</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>11</java.version>
