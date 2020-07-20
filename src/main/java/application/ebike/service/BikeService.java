@@ -28,4 +28,9 @@ public class BikeService {
 
         return bikeRepository.saveAll(bikes);
     }
+
+    public Bike getBikeDetailsByTitle(String bikeTitle) {
+
+        return bikeRepository.findByTitle(bikeTitle);
+    }
 }

@@ -6,4 +6,5 @@ import application.ebike.model.Bike;
 
 public interface BikeRepository extends JpaRepository<Bike, Integer> {
 
+    Bike findByTitle(String title);
 }
