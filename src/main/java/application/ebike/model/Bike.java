@@ -1,9 +1,14 @@
 package application.ebike.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +25,10 @@ public class Bike {
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     private Integer id;
+
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @JoinColumn(name = "bike_id")
+    private Collection<Specification> specifications;
 
     @Column(name = "title", length = 15)
     private String title;
@@ -45,8 +54,6 @@ public class Bike {
     private String color;
     @Column(name = "characteristic", length = 100)
     private String characteristic;
-    @Column(name = "specifications", columnDefinition = "JSON")
-    private String specifications;
 
     @Override
     public String toString() {
