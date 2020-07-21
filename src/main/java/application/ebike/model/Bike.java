@@ -15,11 +15,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "bike")
 @Getter
 @Builder
+@NoArgsConstructor
 public class Bike {
 
     @Id
