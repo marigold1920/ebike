@@ -30,6 +30,9 @@ public class Bike {
     @JoinColumn(name = "bike_id")
     private Collection<Specification> specifications;
 
+    @OneToMany(mappedBy = "bike", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    private Collection<BikeOrderItem> bikeOrders;
+
     @Column(name = "title", length = 15)
     private String title;
     @Column(name = "quote")
@@ -54,9 +57,4 @@ public class Bike {
     private String color;
     @Column(name = "characteristic", length = 100)
     private String characteristic;
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
 }
