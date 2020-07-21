@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
 @Table(name = "bike_order_item")
 @Getter
+@Builder
 public class BikeOrderItem {
 
     @Id
@@ -28,11 +30,11 @@ public class BikeOrderItem {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "bike_id")
     private Bike bike;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 }

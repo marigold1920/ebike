@@ -13,11 +13,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
 @Table(name = "bike")
 @Getter
+@Builder
 public class Bike {
 
     @Id
@@ -30,7 +32,7 @@ public class Bike {
     @JoinColumn(name = "bike_id")
     private Collection<Specification> specifications;
 
-    @OneToMany(mappedBy = "bike", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @OneToMany(mappedBy = "bike", cascade = { CascadeType.MERGE, CascadeType.MERGE })
     private Collection<BikeOrderItem> bikeOrders;
 
     @Column(name = "title", length = 15)

@@ -14,10 +14,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "invoice")
 @Getter
+@Setter
 public class Invoice {
 
     @Id
@@ -26,21 +28,27 @@ public class Invoice {
     @GeneratedValue(generator = "generator")
     private Integer id;
 
-    @OneToMany(mappedBy = "invoice", cascade = { CascadeType.MERGE })
-    private Collection<BikeOrderItem> bikeOrder;
+    @OneToMany(mappedBy = "invoice", cascade = { CascadeType.PERSIST })
+    private Collection<BikeOrderItem> bikeOrders;
+
+    @Column(name = "uid", length = 50)
+    private String uid;
 
     @Column(name = "customer_name", length = 100)
     private String customerName;
 
-    @Column(name = "customerEmail", length = 100)
+    @Column(name = "customer_email", length = 100)
     private String customerEmail;
 
-    @Column(name = "customerAddress", length = 250)
+    @Column(name = "customer_address", length = 250)
     private String customerAddress;
 
-    @Column(name = "customerPhone", length = 11)
+    @Column(name = "customer_phone", length = 11)
     private String phone;
 
     @Column(name = "order_date")
     private LocalDate orderDate;
+
+    @Column(name = "note", length = 1000)
+    private String note;
 }
