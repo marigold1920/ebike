@@ -31,6 +31,9 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice", cascade = { CascadeType.PERSIST })
     private Collection<BikeOrderItem> bikeOrders;
 
+    @OneToMany(mappedBy = "invoice", cascade = { CascadeType.PERSIST })
+    private Collection<ApparelOrderItem> apparelOrders;
+
     @Column(name = "uid", length = 50)
     private String uid;
 
