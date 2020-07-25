@@ -31,7 +31,7 @@ public class EmailSerivce {
                     freeMarkerConfigurer.getConfiguration().getTemplate("/invoice.ftlh"), email.getData());
 
             mimeMessageHelper.setTo(email.getTo());
-            mimeMessageHelper.setSubject("Order Successfull");
+            mimeMessageHelper.setSubject("Order Successful!");
             mimeMessageHelper.setText(templateContent, true);
             mailSender.send(mimeMessage);
         } catch (Exception e) {
