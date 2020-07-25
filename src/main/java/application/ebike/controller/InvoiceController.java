@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import application.ebike.dto.EmailDTO;
 import application.ebike.dto.InvoiceDTO;
+import application.ebike.model.Apparel;
+import application.ebike.model.ApparelOrderItem;
 import application.ebike.model.Bike;
 import application.ebike.model.BikeOrderItem;
 import application.ebike.model.Invoice;
@@ -51,6 +53,11 @@ public class InvoiceController {
                         .bike(Bike.builder().id(bike.getId()).name(bike.getName()).build()).quantity(bike.getQuantity())
                         .build())
                 .collect(Collectors.toList()));
+        invoice.setApparelOrders(invoiceDTO.getApparels().stream()
+                .map(apparel -> ApparelOrderItem.builder().invoice(invoice)
+                        .apparel(Apparel.builder().id(apparel.getId()).name(apparel.getName()).build())
+                        .quantity(apparel.getQuantity()).build())
+                .collect(Collectors.toList()));
         invoice.setOrderDate(LocalDate.now());
 
         return invoice;
@@ -67,7 +74,12 @@ public class InvoiceController {
         email.setSubject("Sondors Order confirmation");
         Map<String, Object> templateData = new HashMap<>();
         templateData.put("name", invoice.getCustomerName());
-        templateData.put("products", invoice.getBikes());
+        templateData.put("bikes", invoice.getBikes());
+        templateData.put("apparels", invoice.getApparels());
+        templateData.put("address", invoice.getCustomerAddress());
+        templateData.put("phone", invoice.getPhone());
+        templateData.put("email", invoice.getCustomerEmail());
+        templateData.put("total", invoice.getTotal());
         email.setData(templateData);
 
         return email;

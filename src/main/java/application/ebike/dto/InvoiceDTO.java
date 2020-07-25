@@ -16,6 +16,8 @@ public class InvoiceDTO {
     private String customerAddress;
     private String phone;
     private String note;
+    private Double total;
 
     private Collection<BikeOrderDTO> bikes;
+    private Collection<ApparelOrderDTO> apparels;
 }

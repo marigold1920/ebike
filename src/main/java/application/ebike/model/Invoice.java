@@ -54,4 +54,7 @@ public class Invoice {
 
     @Column(name = "note", length = 1000)
     private String note;
+
+    @Column(name = "total")
+    private Double total;
 }
