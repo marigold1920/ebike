@@ -23,7 +23,7 @@ public class About {
 
     @Column(name = "address", length = 100)
     private String address;
-    @Column(name = "phone", length = 11)
+    @Column(name = "phone", length = 20)
     private String phone;
     @Column(name = "email", length = 50)
     private String email;
