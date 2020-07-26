@@ -1,5 +1,6 @@
 package application.ebike.dto;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import lombok.Getter;
@@ -17,6 +18,8 @@ public class InvoiceDTO {
     private String phone;
     private String note;
     private Double total;
+    private LocalDate orderDate;
+    private String status;
 
     private Collection<BikeOrderDTO> bikes;
     private Collection<ApparelOrderDTO> apparels;

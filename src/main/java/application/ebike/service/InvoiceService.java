@@ -1,5 +1,7 @@
 package application.ebike.service;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,10 @@ public class InvoiceService {
     public Invoice saveInvoice(Invoice invoice) {
 
         return invoiceRepository.save(invoice);
+    }
+
+    public Collection<Invoice> getInvoicesByUserId(String userId) {
+
+        return invoiceRepository.findByUid(userId);
     }
 }

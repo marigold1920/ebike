@@ -12,13 +12,17 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "bike_order_item")
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BikeOrderItem {
 
     @Id

@@ -8,7 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -29,10 +32,14 @@ public class Invoice {
     private Integer id;
 
     @OneToMany(mappedBy = "invoice", cascade = { CascadeType.PERSIST })
-    private Collection<BikeOrderItem> bikeOrders;
+    private Collection<BikeOrderItem> bikes;
 
     @OneToMany(mappedBy = "invoice", cascade = { CascadeType.PERSIST })
-    private Collection<ApparelOrderItem> apparelOrders;
+    private Collection<ApparelOrderItem> apparels;
+
+    @ManyToOne(cascade = { CascadeType.MERGE })
+    @JoinColumn(name = "invoice_status_id")
+    private InvoiceStatus status;
 
     @Column(name = "uid", length = 50)
     private String uid;
@@ -49,7 +56,7 @@ public class Invoice {
     @Column(name = "customer_phone", length = 11)
     private String phone;
 
-    @Column(name = "order_date")
+    @Column(name = "order_date", columnDefinition = "DATE")
     private LocalDate orderDate;
 
     @Column(name = "note", length = 1000)
@@ -57,4 +64,9 @@ public class Invoice {
 
     @Column(name = "total")
     private Double total;
+
+    @PrePersist
+    private void setOrderDate() {
+        orderDate = LocalDate.now();
+    }
 }
