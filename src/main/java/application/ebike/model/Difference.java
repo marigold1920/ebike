@@ -16,7 +16,7 @@ import lombok.Getter;
 public class Difference {
 
     @Id
-    @Column(name = "bike_id")
+    @Column(name = "difference_id")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     private Integer id;

@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Contact {
 
     @Id
-    @Column(name = "bike_id")
+    @Column(name = "contact_id")
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     private Integer id;
